@@ -1,0 +1,116 @@
+rm -f libacados_ocp_solver_hummingbird.so
+rm -f acados_solver_hummingbird.o
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o acados_solver_hummingbird.o acados_solver_hummingbird.c
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o hummingbird_model/hummingbird_expl_ode_fun.o hummingbird_model/hummingbird_expl_ode_fun.c
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o hummingbird_model/hummingbird_expl_vde_forw.o hummingbird_model/hummingbird_expl_vde_forw.c
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o hummingbird_model/hummingbird_expl_vde_adj.o hummingbird_model/hummingbird_expl_vde_adj.c
+cc -shared acados_solver_hummingbird.o hummingbird_model/hummingbird_expl_ode_fun.o hummingbird_model/hummingbird_expl_vde_forw.o hummingbird_model/hummingbird_expl_vde_adj.o -o libacados_ocp_solver_hummingbird.so -L/home/sxh/acados/lib -lacados -lhpipm -lblasfeo -lm  \
+-L -l
+[INFO] [1780834236.133586, 3542.700000]: Sending increasing speed loop trajectory
+Maximum yawrate before adaption: 1.772
+Maximum yawrate after adaption: 0.001
+[WARN] [1780834396.817730, 3623.020000]: Recording time skipped messages: 1
+[ERROR] [1780834470.244354, 3659.730000]: bad callback: <bound method MPCWrapper.odometry_callback of <__main__.MPCWrapper object at 0x7f63692e6550>>
+Traceback (most recent call last):
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/topics.py", line 750, in _invoke_callback
+    cb(msg)
+  File "/home/sxh/zyy_ws/src/SSI-MPC/ros_mpc/nodes/mpc_node.py", line 404, in odometry_callback
+    self.ref_publish(empty=True)
+  File "/home/sxh/zyy_ws/src/SSI-MPC/ros_mpc/nodes/mpc_node.py", line 765, in ref_publish
+    self.ref_pub.publish(path_msg)
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/topics.py", line 882, in publish
+    self.impl.publish(data)
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/topics.py", line 1041, in publish
+    raise ROSException("publish() to a closed topic")
+rospy.exceptions.ROSException: publish() to a closed topic
+
+[INFO] [1780834226.264055, 0.000000]: Physics running at 0.50 normal speed
+[INFO] [1780834226.266005, 0.000000]: Using random features. n_rf: 50, lr: 0.25, Gaussian kernel_std: 0.01.
+field AcadosOcpDims.N has been migrated to AcadosOcpOptions.N_horizon. setting AcadosOcpOptions.N_horizon = N. For future comppatibility, please use AcadosOcpOptions.N_horizon directly.
+External functions generated in 23.097 ms.
+Templated solver code generated in 510.234 ms.
+Build completed in 1182.244 ms.
+acados was compiled without OpenMP.
+[INFO] [1780834228.012396, 3538.640000]: Entering provisional hovering mode while to reference is available at: 
+[INFO] [1780834228.014035, 3538.640000]: [-0.010185853364277225, -0.06821770592382051, 0.06327676441925145, 0.9987381549443773, -0.034203441352269805, 0.0012265344378946117, -0.03675211655450133, -1.892631550826497e-05, 0.003913750389614161, -3.493495831305379e-05, -0.006240253807271404, -0.006978051684364837, 0.008039088888064469]
+[INFO] [1780834236.240797, 3542.750000]: New trajectory received. Time duration: 103.98 s. Max velocity: 12.50 m/s. Max speed: 12.5683. Max input: 0.9925.
+[INFO] [1780834236.254104, 3542.760000]: Abandoning provisional hovering mode.
+[INFO] [1780834246.616408, 3547.940000]: Reached initial position of trajectory.
+[INFO] [1780834464.661651, 3656.940000]: Tracking complete. Total RMSE: 0.08978 m. Max axial vel: 12.304. Max speed: 12.364. Mean optimization time: 3.138 ms
+[INFO] [1780834464.700927, 3656.960000]: Entering provisional hovering mode while to reference is available at: 
+[INFO] [1780834464.702147, 3656.960000]: [4.684077597101093, -6.73457262251328, 0.14380667319829318, -0.9991360940004927, 0.00010932434757915605, -0.00040503775320637695, -0.04155586189749847, 0.002394847364631914, 0.0013319935642354627, -0.15359469456820107, 0.0006812598991595323, -0.001206017646550799, -0.039462940580371135]
+[INFO] [1780834466.264267, 3657.740000]: No more references will be received
+Traceback (most recent call last):
+  File "/home/sxh/zyy_ws/src/SSI-MPC/ros_mpc/nodes/mpc_node.py", line 907, in <module>
+    main()
+  File "/home/sxh/zyy_ws/src/SSI-MPC/ros_mpc/nodes/mpc_node.py", line 903, in main
+    MPCWrapper(quad_name, env, recording_options, plot=plot, reset_experiment=reset, save_data=save_data)
+  File "/home/sxh/zyy_ws/src/SSI-MPC/ros_mpc/nodes/mpc_node.py", line 241, in __init__
+    rate.sleep()
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/timer.py", line 103, in sleep
+    sleep(self._remaining(curr_time))
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/timer.py", line 165, in sleep
+    raise rospy.exceptions.ROSInterruptException("ROS shutdown request")
+rospy.exceptions.ROSInterruptException: ROS shutdown request
+... logging to /home/sxh/.ros/log/62ad7080-6259-11f1-8b61-ed52a31e366d/roslaunch-sxh-Legion-R9000P-ARX8-243473.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/sxh/zyy_ws/src/paper_reproduction/launch/mpc_repro.launch
+[1mstarted roslaunch server http://sxh-Legion-R9000P-ARX8:45487/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /mpc_wrapper/control_freq_factor: 5
+ * /mpc_wrapper/environment: gazebo
+ * /mpc_wrapper/heuristic: False
+ * /mpc_wrapper/kernel: Gaussian
+ * /mpc_wrapper/kernel_std: 0.01
+ * /mpc_wrapper/lr: 0.25
+ * /mpc_wrapper/n_nodes: 10
+ * /mpc_wrapper/n_rf: 50
+ * /mpc_wrapper/overwrite: True
+ * /mpc_wrapper/plot: False
+ * /mpc_wrapper/quad_name: hummingbird
+ * /mpc_wrapper/recording: False
+ * /mpc_wrapper/reset_experiment: True
+ * /mpc_wrapper/save_data: True
+ * /mpc_wrapper/t_horizon: 1
+ * /mpc_wrapper/use_ekf_synchronization: False
+ * /mpc_wrapper/world_limits: None
+ * /ref_gen/control_freq_factor: 5
+ * /ref_gen/environment: gazebo
+ * /ref_gen/loop_clockwise: False
+ * /ref_gen/loop_lin_a: 0.25
+ * /ref_gen/loop_r: 5.0
+ * /ref_gen/loop_v_max: 12.5
+ * /ref_gen/loop_yawing: False
+ * /ref_gen/loop_z: 2.5
+ * /ref_gen/mode: loop
+ * /ref_gen/n_nodes: 10
+ * /ref_gen/n_seeds: 1
+ * /ref_gen/plot: False
+ * /ref_gen/quad_name: hummingbird
+ * /ref_gen/t_horizon: 1
+ * /ref_gen/use_ekf_synchronization: False
+ * /ref_gen/world_limits: None
+ * /rosdistro: noetic
+ * /rosversion: 1.17.4
+
+NODES
+  /
+    mpc_wrapper (ros_mpc/mpc_node.py)
+    ref_gen (ros_mpc/reference_publisher_node.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/sxh/zyy_ws/src/paper_reproduction/launch/mpc_repro.launch http://localhost:11311
+[1mprocess[mpc_wrapper-1]: started with pid [243521][0m
+[1mprocess[ref_gen-2]: started with pid [243522][0m
+[1m[ref_gen-2] process has finished cleanly
+log file: /home/sxh/.ros/log/62ad7080-6259-11f1-8b61-ed52a31e366d/ref_gen-2*.log[0m
+[mpc_wrapper-1] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

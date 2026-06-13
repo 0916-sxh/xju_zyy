@@ -1,0 +1,118 @@
+rm -f libacados_ocp_solver_hummingbird_domain_0.so
+rm -f acados_solver_hummingbird_domain_0.o
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o acados_solver_hummingbird_domain_0.o acados_solver_hummingbird_domain_0.c
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o hummingbird_domain_0_model/hummingbird_domain_0_expl_ode_fun.o hummingbird_domain_0_model/hummingbird_domain_0_expl_ode_fun.c
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_forw.o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_forw.c
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_adj.o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_adj.c
+cc -shared acados_solver_hummingbird_domain_0.o hummingbird_domain_0_model/hummingbird_domain_0_expl_ode_fun.o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_forw.o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_adj.o -o libacados_ocp_solver_hummingbird_domain_0.so -L/home/sxh/acados/lib -lacados -lhpipm -lblasfeo -lm  \
+-L -l
+[INFO] [1780840521.531064, 6684.750000]: Sending increasing speed loop trajectory
+Maximum yawrate before adaption: 0.120
+Maximum yawrate after adaption: 0.000
+[INFO] [1780840511.622225, 0.000000]: Physics running at 0.50 normal speed
+[INFO] [1780840511.624509, 0.000000]: Attempting to load GP model from:
+   git: e0d4afb
+   name: gazebo_sim_gp
+   meta: {'gazebo': 'default'}
+[INFO] [1780840511.626668, 0.000000]: Successfully loaded GP model
+field AcadosOcpDims.N has been migrated to AcadosOcpOptions.N_horizon. setting AcadosOcpOptions.N_horizon = N. For future comppatibility, please use AcadosOcpOptions.N_horizon directly.
+External functions generated in 40.559 ms.
+Templated solver code generated in 512.217 ms.
+Build completed in 2939.377 ms.
+acados was compiled without OpenMP.
+[INFO] [1780840515.149390, 6681.560000]: Entering provisional hovering mode while to reference is available at: 
+[INFO] [1780840515.149926, 6681.560000]: [-0.0329975875681684, 0.024122002305060425, 0.05996412289250414, 0.999408366464895, 6.002470229521771e-05, 7.761918157320488e-05, -0.034393421060835136, -0.0009383276753818787, 0.0005636776276897236, -0.003730871524582705, 0.011462967495213375, 0.013066243369792303, 0.006343844031634134]
+[INFO] [1780840521.585553, 6684.770000]: New trajectory received. Time duration: 43.98 s. Max velocity: 5.00 m/s. Max speed: 5.0683.
+[INFO] [1780840521.591185, 6684.780000]: Abandoning provisional hovering mode.
+[INFO] [1780840535.153810, 6691.560000]: Reached initial position of trajectory.
+[INFO] [1780840631.894196, 6739.920000]: Tracking complete. Total RMSE: 0.07732 m. Max axial vel: 5.030. Mean optimization time: 2.298 ms
+[INFO] [1780840631.933600, 6739.940000]: Entering provisional hovering mode while to reference is available at: 
+[INFO] [1780840631.935205, 6739.940000]: [0.17298136329281413, -9.970623841679027, 0.14036319959876256, 0.9994339469531516, -8.539407870311747e-05, -4.122540351610482e-05, -0.03364188885842499, 0.0002993005310567658, -0.000947424168613167, -0.26152767491657064, 3.2264888794479734e-05, 0.0003298833455797932, 0.007151686111965905]
+Traceback (most recent call last):
+  File "/home/sxh/zyy_ws/src/SSI-MPC/ros_mpc/nodes/reference_publisher_node.py", line 236, in <module>
+    ReferenceGenerator()
+  File "/home/sxh/zyy_ws/src/SSI-MPC/ros_mpc/nodes/reference_publisher_node.py", line 223, in __init__
+    rate.sleep()
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/timer.py", line 103, in sleep
+    sleep(self._remaining(curr_time))
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/timer.py", line 165, in sleep
+    raise rospy.exceptions.ROSInterruptException("ROS shutdown request")
+rospy.exceptions.ROSInterruptException: ROS shutdown request
+Traceback (most recent call last):
+  File "/home/sxh/zyy_ws/devel/lib/paper_reproduction/gp_mpc_repro_node.py", line 15, in <module>
+    exec(compile(fh.read(), python_script, 'exec'), context)
+  File "/home/sxh/zyy_ws/src/paper_reproduction/scripts/gp_mpc_repro_node.py", line 125, in <module>
+    main()
+  File "/home/sxh/zyy_ws/src/paper_reproduction/scripts/gp_mpc_repro_node.py", line 111, in main
+    GPMPCWrapper(
+  File "/home/sxh/zyy_ws/src/paper_reproduction/scripts/gp_mpc_repro_node.py", line 43, in _gpmpc_init_save_to_benchmark
+    _orig_gpmpc_init(self, *args, **kwargs)
+  File "/home/sxh/zyy_ws/src/SSI-MPC/ros_mpc/nodes/gp_mpc_node.py", line 287, in __init__
+    rate.sleep()
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/timer.py", line 103, in sleep
+    sleep(self._remaining(curr_time))
+  File "/opt/ros/noetic/lib/python3/dist-packages/rospy/timer.py", line 165, in sleep
+    raise rospy.exceptions.ROSInterruptException("ROS shutdown request")
+rospy.exceptions.ROSInterruptException: ROS shutdown request
+... logging to /home/sxh/.ros/log/62ad7080-6259-11f1-8b61-ed52a31e366d/roslaunch-sxh-Legion-R9000P-ARX8-360278.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/sxh/zyy_ws/src/paper_reproduction/launch/gp_mpc_repro.launch
+[1mstarted roslaunch server http://sxh-Legion-R9000P-ARX8:39765/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /gp_mpc/mpc_wrapper/control_freq_factor: 5
+ * /gp_mpc/mpc_wrapper/dataset_name: gazebo_dataset
+ * /gp_mpc/mpc_wrapper/environment: gazebo
+ * /gp_mpc/mpc_wrapper/model_name: gazebo_sim_gp
+ * /gp_mpc/mpc_wrapper/model_type: gp
+ * /gp_mpc/mpc_wrapper/model_version: e0d4afb
+ * /gp_mpc/mpc_wrapper/n_nodes: 10
+ * /gp_mpc/mpc_wrapper/overwrite: True
+ * /gp_mpc/mpc_wrapper/plot: False
+ * /gp_mpc/mpc_wrapper/quad_name: hummingbird
+ * /gp_mpc/mpc_wrapper/record_raw_optitrack: False
+ * /gp_mpc/mpc_wrapper/recording: False
+ * /gp_mpc/mpc_wrapper/reset_experiment: True
+ * /gp_mpc/mpc_wrapper/save_data: True
+ * /gp_mpc/mpc_wrapper/t_horizon: 1
+ * /gp_mpc/mpc_wrapper/training_split: True
+ * /gp_mpc/mpc_wrapper/use_ekf_synchronization: False
+ * /gp_mpc/mpc_wrapper/world_limits: None
+ * /gp_mpc/ref_gen/control_freq_factor: 5
+ * /gp_mpc/ref_gen/environment: gazebo
+ * /gp_mpc/ref_gen/loop_clockwise: False
+ * /gp_mpc/ref_gen/loop_lin_a: 0.25
+ * /gp_mpc/ref_gen/loop_r: 5.0
+ * /gp_mpc/ref_gen/loop_v_max: 5.0
+ * /gp_mpc/ref_gen/loop_yawing: False
+ * /gp_mpc/ref_gen/loop_z: 2.5
+ * /gp_mpc/ref_gen/mode: loop
+ * /gp_mpc/ref_gen/n_nodes: 10
+ * /gp_mpc/ref_gen/n_seeds: 1
+ * /gp_mpc/ref_gen/plot: False
+ * /gp_mpc/ref_gen/quad_name: hummingbird
+ * /gp_mpc/ref_gen/t_horizon: 1
+ * /gp_mpc/ref_gen/use_ekf_synchronization: False
+ * /gp_mpc/ref_gen/world_limits: None
+ * /rosdistro: noetic
+ * /rosversion: 1.17.4
+
+NODES
+  /gp_mpc/
+    mpc_wrapper (paper_reproduction/gp_mpc_repro_node.py)
+    ref_gen (ros_mpc/reference_publisher_node.py)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/sxh/zyy_ws/src/paper_reproduction/launch/gp_mpc_repro.launch http://localhost:11311
+[1mprocess[gp_mpc/mpc_wrapper-1]: started with pid [360326][0m
+[1mprocess[gp_mpc/ref_gen-2]: started with pid [360327][0m
+[gp_mpc/ref_gen-2] killing on exit
+[gp_mpc/mpc_wrapper-1] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

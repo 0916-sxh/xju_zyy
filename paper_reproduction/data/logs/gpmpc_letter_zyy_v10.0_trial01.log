@@ -1,0 +1,8 @@
+rm -f libacados_ocp_solver_hummingbird_domain_0.so
+rm -f acados_solver_hummingbird_domain_0.o
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o acados_solver_hummingbird_domain_0.o acados_solver_hummingbird_domain_0.c
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o hummingbird_domain_0_model/hummingbird_domain_0_expl_ode_fun.o hummingbird_domain_0_model/hummingbird_domain_0_expl_ode_fun.c
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_forw.o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_forw.c
+cc -fPIC -std=c99   -O2 -I/home/sxh/acados/include -I/home/sxh/acados/include/acados -I/home/sxh/acados/include/blasfeo/include -I/home/sxh/acados/include/hpipm/include  -c -o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_adj.o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_adj.c
+cc -shared acados_solver_hummingbird_domain_0.o hummingbird_domain_0_model/hummingbird_domain_0_expl_ode_fun.o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_forw.o hummingbird_domain_0_model/hummingbird_domain_0_expl_vde_adj.o -o libacados_ocp_solver_hummingbird_domain_0.so -L/home/sxh/acados/lib -lacados -lhpipm -lblasfeo -lm  \
+-L -l

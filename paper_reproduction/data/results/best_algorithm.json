@@ -1,0 +1,76 @@
+{
+  "v_max": 10.0,
+  "per_trajectory": {
+    "circle": {
+      "algorithm": "ssi_n100",
+      "label_cn": "SSI-MPC M=100",
+      "rmse_m": 0.05012,
+      "candidates": {
+        "nominal": 0.22021,
+        "ssi": 0.05456,
+        "ssi_n100": 0.05012,
+        "ssi_n100_lr015": 0.05363,
+        "ssi_longhorizon": 0.05047,
+        "gpmpc": 0.1279,
+        "rdrv": 0.0996
+      }
+    },
+    "lemniscate": {
+      "algorithm": "ssi",
+      "label_cn": "SSI-MPC（论文默认）",
+      "rmse_m": 0.07127,
+      "candidates": {
+        "nominal": 0.19561,
+        "ssi": 0.07127,
+        "ssi_n100": 0.07135,
+        "ssi_n100_lr015": 0.07664,
+        "ssi_longhorizon": 0.07293,
+        "gpmpc": 0.12282,
+        "rdrv": 0.09145
+      }
+    },
+    "letter_zyy": {
+      "algorithm": "ssi",
+      "label_cn": "SSI-MPC（论文默认）",
+      "rmse_m": 0.00213,
+      "candidates": {
+        "nominal": 0.02232,
+        "ssi": 0.00213
+      }
+    },
+    "wrapped_circle": {
+      "algorithm": "ssi_n100",
+      "label_cn": "SSI-MPC M=100",
+      "rmse_m": 0.0673,
+      "candidates": {
+        "nominal": 0.21584,
+        "ssi": 0.06968,
+        "ssi_n100": 0.0673,
+        "ssi_n100_lr015": 0.07384,
+        "ssi_longhorizon": 0.0713,
+        "gpmpc": 0.13532,
+        "rdrv": 0.10738
+      }
+    },
+    "wrapped_lemniscate": {
+      "algorithm": "ssi_longhorizon",
+      "label_cn": "SSI-MPC 长预测域",
+      "rmse_m": 0.17311,
+      "candidates": {
+        "nominal": 0.29946,
+        "ssi": 0.18355,
+        "ssi_n100": 0.18393,
+        "ssi_n100_lr015": 0.19315,
+        "ssi_longhorizon": 0.17311,
+        "gpmpc": 0.23126,
+        "rdrv": 0.1977
+      }
+    }
+  },
+  "overall_recommendation": {
+    "algorithm": "ssi",
+    "label_cn": "SSI-MPC（论文默认）",
+    "mean_rmse_m": 0.076238
+  },
+  "note": "Based on archived rmse_records.csv; re-run 09_run_tuning_benchmark.sh to refresh."
+}

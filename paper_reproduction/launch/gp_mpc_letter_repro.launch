@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- GP-MPC with Z/Y letter reference (paper_reproduction). -->
+
+    <arg name="environment" default="gazebo"/>
+    <arg name="recording" default="false"/>
+    <arg name="plot" default="false"/>
+    <arg name="save_data" default="true"/>
+    <arg name="t_horizon" default="1"/>
+    <arg name="n_nodes" default="10"/>
+    <arg name="reset_experiment" default="true"/>
+    <arg name="model_version" default=""/>
+    <arg name="model_name" default="gazebo_sim_gp"/>
+    <arg name="model_type" default="gp"/>
+
+    <arg name="letter" default="z"/>
+    <arg name="loop_z" default="2.5"/>
+    <arg name="loop_v_max" default="10.0"/>
+    <arg name="loop_lin_a" default="0.25"/>
+    <arg name="letter_scale" default="1.15"/>
+    <arg name="letter_center_x" default="8.0"/>
+    <arg name="letter_center_y" default="0.0"/>
+
+    <group ns="gp_mpc">
+        <node pkg="paper_reproduction" type="gp_mpc_repro_node.py" name="mpc_wrapper" output="screen">
+            <rosparam file="$(find ros_mpc)/config/simulation_run.yaml"/>
+            <param name="recording" value="$(arg recording)"/>
+            <param name="overwrite" value="true"/>
+            <param name="model_type" value="$(arg model_type)"/>
+            <param name="model_version" value="$(arg model_version)"/>
+            <param name="model_name" value="$(arg model_name)"/>
+            <param name="plot" value="$(arg plot)"/>
+            <param name="save_data" value="$(arg save_data)"/>
+            <param name="t_horizon" value="$(arg t_horizon)"/>
+            <param name="n_nodes" value="$(arg n_nodes)"/>
+            <param name="reset_experiment" value="$(arg reset_experiment)"/>
+            <param name="environment" value="$(arg environment)"/>
+        </node>
+
+        <node pkg="paper_reproduction" type="letter_ref_publisher_node.py" name="ref_gen" output="screen">
+            <param name="plot" value="$(arg plot)"/>
+            <param name="letter" value="$(arg letter)"/>
+            <param name="loop_z" value="$(arg loop_z)"/>
+            <param name="loop_v_max" value="$(arg loop_v_max)"/>
+            <param name="loop_lin_a" value="$(arg loop_lin_a)"/>
+            <param name="letter_scale" value="$(arg letter_scale)"/>
+            <param name="letter_center_x" value="$(arg letter_center_x)"/>
+            <param name="letter_center_y" value="$(arg letter_center_y)"/>
+            <param name="t_horizon" value="$(arg t_horizon)"/>
+            <param name="n_nodes" value="$(arg n_nodes)"/>
+        </node>
+    </group>
+</launch>

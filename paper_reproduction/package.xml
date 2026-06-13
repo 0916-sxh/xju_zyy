@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>paper_reproduction</name>
+  <version>0.1.0</version>
+  <description>Reproduction scripts and configs for SSI-MPC paper figures (Section V-D).</description>
+  <maintainer email="user@todo.todo">user</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>ros_mpc</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <export/>
+</package>

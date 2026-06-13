@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Paper reproduction launch for Nominal MPC / SSI-MPC (does not modify ros_mpc source). -->
+
+    <arg name="recording" default="false"/>
+    <arg name="overwrite" default="true"/>
+    <arg name="n_seeds" default="1"/>
+    <arg name="plot" default="false"/>
+    <arg name="save_data" default="true"/>
+    <arg name="t_horizon" default="1"/>
+    <arg name="n_nodes" default="10"/>
+    <arg name="reset_experiment" default="true"/>
+
+    <!-- Algorithm parameters (paper Section V-D): M=50, eta=0.25 -->
+    <arg name="n_rf" default="50"/>
+    <arg name="lr" default="0.25"/>
+    <arg name="heuristic" default="False"/>
+    <arg name="kernel" default="Gaussian"/>
+    <arg name="kernel_std" default="0.01"/>
+
+    <!-- Absolute path to generated trajectory yaml -->
+    <arg name="traj_config" default="$(find paper_reproduction)/config/generated/circle_v10.0.yaml"/>
+
+    <node pkg="ros_mpc" type="mpc_node.py" name="mpc_wrapper" output="screen">
+        <rosparam file="$(find ros_mpc)/config/simulation_run.yaml"/>
+        <param name="recording" value="$(arg recording)"/>
+        <param name="overwrite" value="$(arg overwrite)"/>
+        <param name="plot" value="$(arg plot)"/>
+        <param name="save_data" value="$(arg save_data)"/>
+        <param name="t_horizon" value="$(arg t_horizon)"/>
+        <param name="n_nodes" value="$(arg n_nodes)"/>
+        <param name="reset_experiment" value="$(arg reset_experiment)"/>
+        <param name="n_rf" value="$(arg n_rf)"/>
+        <param name="lr" value="$(arg lr)"/>
+        <param name="heuristic" value="$(arg heuristic)"/>
+        <param name="kernel" value="$(arg kernel)"/>
+        <param name="kernel_std" value="$(arg kernel_std)"/>
+    </node>
+
+    <node pkg="ros_mpc" type="reference_publisher_node.py" name="ref_gen" output="screen">
+        <rosparam file="$(find ros_mpc)/config/simulation_run.yaml"/>
+        <rosparam file="$(arg traj_config)"/>
+        <param name="n_seeds" value="$(arg n_seeds)"/>
+        <param name="t_horizon" value="$(arg t_horizon)"/>
+        <param name="n_nodes" value="$(arg n_nodes)"/>
+        <param name="plot" value="$(arg plot)"/>
+    </node>
+</launch>

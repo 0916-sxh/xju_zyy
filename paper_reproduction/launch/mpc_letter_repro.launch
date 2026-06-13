@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Nominal / SSI-MPC with Z/Y letter reference (paper_reproduction). -->
+
+    <arg name="recording" default="false"/>
+    <arg name="overwrite" default="true"/>
+    <arg name="plot" default="false"/>
+    <arg name="save_data" default="true"/>
+    <arg name="t_horizon" default="1"/>
+    <arg name="n_nodes" default="10"/>
+    <arg name="reset_experiment" default="true"/>
+
+    <arg name="n_rf" default="50"/>
+    <arg name="lr" default="0.25"/>
+    <arg name="heuristic" default="False"/>
+    <arg name="kernel" default="Gaussian"/>
+    <arg name="kernel_std" default="0.01"/>
+
+    <arg name="letter" default="z"/>
+    <arg name="loop_z" default="2.5"/>
+    <arg name="loop_v_max" default="10.0"/>
+    <arg name="loop_lin_a" default="0.25"/>
+    <arg name="letter_scale" default="1.15"/>
+    <arg name="letter_center_x" default="8.0"/>
+    <arg name="letter_center_y" default="0.0"/>
+
+    <node pkg="ros_mpc" type="mpc_node.py" name="mpc_wrapper" output="screen">
+        <rosparam file="$(find ros_mpc)/config/simulation_run.yaml"/>
+        <param name="recording" value="$(arg recording)"/>
+        <param name="overwrite" value="$(arg overwrite)"/>
+        <param name="plot" value="$(arg plot)"/>
+        <param name="save_data" value="$(arg save_data)"/>
+        <param name="t_horizon" value="$(arg t_horizon)"/>
+        <param name="n_nodes" value="$(arg n_nodes)"/>
+        <param name="reset_experiment" value="$(arg reset_experiment)"/>
+        <param name="n_rf" value="$(arg n_rf)"/>
+        <param name="lr" value="$(arg lr)"/>
+        <param name="heuristic" value="$(arg heuristic)"/>
+        <param name="kernel" value="$(arg kernel)"/>
+        <param name="kernel_std" value="$(arg kernel_std)"/>
+    </node>
+
+    <node pkg="paper_reproduction" type="letter_ref_publisher_node.py" name="ref_gen" output="screen">
+        <param name="plot" value="$(arg plot)"/>
+        <param name="letter" value="$(arg letter)"/>
+        <param name="loop_z" value="$(arg loop_z)"/>
+        <param name="loop_v_max" value="$(arg loop_v_max)"/>
+        <param name="loop_lin_a" value="$(arg loop_lin_a)"/>
+        <param name="letter_scale" value="$(arg letter_scale)"/>
+        <param name="letter_center_x" value="$(arg letter_center_x)"/>
+        <param name="letter_center_y" value="$(arg letter_center_y)"/>
+        <param name="t_horizon" value="$(arg t_horizon)"/>
+        <param name="n_nodes" value="$(arg n_nodes)"/>
+    </node>
+</launch>
